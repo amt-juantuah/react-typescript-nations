@@ -11,6 +11,8 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     background-color: var(--color-elements);
+    position: sticky;
+    top: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
 `;
 

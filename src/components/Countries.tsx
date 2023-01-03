@@ -22,6 +22,7 @@ const FilterBox = styled.div`
 const SearchBox = styled.div`
     height: 56px;
     width: 480px;
+    display: flex;
     background-color: var(--color-elements);
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
     border-radius: 5px;
@@ -30,12 +31,13 @@ const SearchBox = styled.div`
 const Search = styled.input`
     border: none;
     outline: none;
-    flex: 5;
+    flex: 1;
     height: 100%;
+    width: 100%;
 `;
 
 const SearchIconBox = styled.div`
-    flex: 1;
+    flex: 0.2;
     height: 100%;
     display: flex;
     justify-content: center;
@@ -49,15 +51,23 @@ const SelectFilter = styled.select`
     border-radius: 5px;
     height: 56px;
     width: 200px;
+    border: none;
+    outline: none;
+    padding-left: 20px;
+    padding-right: 20px;
 `;
 
-const Option = styled.option``;
+const Option = styled.option`
+    height: 25px;
+`;
 
 const All = styled.div`
     width: 100%;
     height: auto;
     display: flex;
     flex-wrap: wrap;
+    row-gap: 75px;
+    column-gap: 48px;
 `;
 
 const Countries:React.FC = () => {
@@ -68,10 +78,10 @@ const Countries:React.FC = () => {
                 <SearchIconBox>
                     <SearchRounded />
                 </SearchIconBox>
-                <Search type="text" placeholder="Search for a country"/>
+                <Search type="text" placeholder="Search for a country..."/>
             </SearchBox>
             <SelectFilter>
-                <Option>Filter by region</Option>
+                <Option>Filter by Region</Option>
                 <Option>Africa</Option>
                 <Option>America</Option>
                 <Option>Asia</Option>
