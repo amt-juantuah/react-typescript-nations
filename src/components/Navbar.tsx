@@ -20,6 +20,9 @@ const Container = styled.div`
       padding-right: 28px;
     }
 `;
+const Div = styled.div`
+    display: content;
+`;
 
 const Title = styled.h2`
   @media screen and (max-width: 480px) {
@@ -63,7 +66,10 @@ const Mode = styled.p`
 const Navbar:React.FC = () => {
   return (
     <Container>
-        <Title>Where in the world</Title>
+        <Div>
+          <Title>Where in the world...</Title>
+          <Span>is that country?</Span>
+        </Div>
         <Mode id="themeToggler">
           <Brightness6Sharp />
           <Span>Go Dark</Span>

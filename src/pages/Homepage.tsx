@@ -9,7 +9,7 @@ const Homepage:React.FC = () => {
   return (
     <Container>
         <Navbar />
-        <Countries />
+        <Countries country={{}} allCountries={[]} />
     </Container>
   )
 }

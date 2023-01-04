@@ -42,19 +42,26 @@ const WordBox = styled.div`
 
 const Words = styled.p``;
 
+type Props = {
+    country: {
+        [index: string]:any;
+    };
+}
 
-const Country:React.FC = () => {
+
+const Country:React.FC<Props> = props => {
+    const { country } = props;
   return (
     <Container>
         <Flag>
-            <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" />
+            <Image src={ country.flags.png} />
         </Flag>
         <About>
-            <SubTitle>Germany</SubTitle>
+            <SubTitle>{ country.name.common}</SubTitle>
             <WordBox>
-                <Words><b>Population: </b> 21322323223</Words>
-                <Words><b>Region: </b> Europe</Words>
-                <Words><b>Capital: </b> Berlin</Words>
+                <Words><b>Population: </b> { country.population}</Words>
+                <Words><b>Region: </b> { country.region}</Words>
+                <Words><b>Capital: </b> { country.capital}</Words>
             </WordBox>
         </About>
     </Container>

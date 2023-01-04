@@ -1,0 +1,16 @@
+[
+  {
+    "_id": "76f86a1c-d918-41c7-8ae5-8a774ddd8ad2",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://restcountries.com/v3.1/all",
+    "url": "https://restcountries.com/v3.1/all",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-04T04:27:06.776Z",
+    "modified": "2023-01-04T04:27:06.776Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  }
+]

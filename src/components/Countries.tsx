@@ -1,7 +1,8 @@
 import { SearchRounded } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Country from './Country';
+import axios, { AxiosResponse } from 'axios';
 
 const Container = styled.div`
     width: 100vw;
@@ -96,7 +97,38 @@ const All = styled.div`
       }
 `;
 
-const Countries:React.FC = () => {
+type Props = {
+    country: object;
+    allCountries: object[];
+}
+
+
+const Countries: React.FC<Props> = props => {
+    const { country, allCountries } = props;
+
+    const [countries, setCountries] = useState(allCountries);
+    useEffect( () => {
+        const getData = async () => {
+            try {
+                const { data } = await axios.get<typeof allCountries>(
+                    "https://restcountries.com/v3.1/all",
+                    {
+                        headers: {
+                            Accept: 'application/json',
+                          },
+                    }
+                );
+                setCountries(data);
+                console.log(data);
+                console.log(typeof country)
+                console.log("countries", countries)
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        getData();
+    },[]);
+
   return (
     <Container>
         <FilterBox>
@@ -116,14 +148,7 @@ const Countries:React.FC = () => {
             </SelectFilter>
         </FilterBox>
         <All>
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
-            <Country />
+            { countries.map(item => (<Country country={item} />))}
         </All>
     </Container>
   )
