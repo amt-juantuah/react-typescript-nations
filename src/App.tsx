@@ -1,5 +1,6 @@
 import React from 'react';
 import Homepage from './pages/Homepage';
+import Details from './pages/Details';
 
 function App() {
   return (

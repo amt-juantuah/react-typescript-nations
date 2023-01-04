@@ -9,6 +9,10 @@ const Container = styled.div`
     padding: 48px 81px;
     display: flex;
     flex-flow: column;
+    @media screen and (max-width: 480px) {
+        padding-left: 28px;
+        padding-right: 28px;
+      }
 `;
 
 const FilterBox = styled.div`
@@ -26,6 +30,10 @@ const SearchBox = styled.div`
     background-color: var(--color-elements);
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
     border-radius: 5px;
+    @media screen and (max-width: 480px) {
+        height: 48px;
+        width: 343px;
+    }
 `;
 
 const Search = styled.input`
@@ -34,6 +42,10 @@ const Search = styled.input`
     flex: 1;
     height: 100%;
     width: 100%;
+    &::placeholder {
+        color: #C4C4C4;
+        font-size: 12px;
+    }
 `;
 
 const SearchIconBox = styled.div`
@@ -54,11 +66,21 @@ const SelectFilter = styled.select`
     border: none;
     outline: none;
     padding-left: 20px;
+    line-height: 20px;
     padding-right: 20px;
+    @media screen and (max-width: 480px) {
+        font-size: 12px;
+        height: 48px;
+        margin-top: 30px;
+      }
 `;
 
 const Option = styled.option`
-    height: 25px;
+    line-height: 20px;
+    @media screen and (max-width: 480px) {
+        font-size: 12px;
+        margin-top: 10px;
+      }
 `;
 
 const All = styled.div`
@@ -68,6 +90,10 @@ const All = styled.div`
     flex-wrap: wrap;
     row-gap: 75px;
     column-gap: 48px;
+    @media screen and (max-width: 480px) {
+        padding-left: 27px;
+        padding-right: 27px;
+      }
 `;
 
 const Countries:React.FC = () => {

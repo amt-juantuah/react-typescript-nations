@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Flag = styled.div`
     background-color: red;
-    width: 100%;
+    width: 264px;
     height: 160px;
     border-radius: 5px 5px 0 0;
 `;
@@ -19,6 +19,7 @@ const Flag = styled.div`
 const Image = styled.img`
     width: 100%;
     height: 100%;
+    border-radius: 5px 5px 0 0;
 `;
 
 const About = styled.div`
@@ -41,18 +42,12 @@ const WordBox = styled.div`
 
 const Words = styled.p``;
 
-/**
- * Country data
-*/
-// type CountryProps = {
-//     flag: string;
-// }
 
 const Country:React.FC = () => {
   return (
     <Container>
         <Flag>
-            <Image src="https://restcountries.com/data/png/jpn.png" />
+            <Image src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png" />
         </Flag>
         <About>
             <SubTitle>Germany</SubTitle>
