@@ -1,10 +1,16 @@
 import { KeyboardBackspace } from '@mui/icons-material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Link, useLocation  } from 'react-router-dom';
+import axios from 'axios';
 
 
 const Container = styled.div`
     padding: 45px 80px;
+    & a {
+        display: contents;
+        cursor: pointer;
+    }
     @media screen and (max-width: 480px) {
         padding: 40px 28px;
     }
@@ -13,6 +19,7 @@ const Container = styled.div`
 const BackButton = styled.button`
     display: flex;
     flex-flow: row;
+    cursor: pointer;
     align-items: center;
     justify-content: center;
     transition: all 0.3s;
@@ -24,6 +31,9 @@ const BackButton = styled.button`
     outline: none;
     border: none;
     gap: 10px;
+    & a {
+        display:contents;
+    };
     &:hover {
         box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.293139);
     };
@@ -163,38 +173,44 @@ const NeighbourButtom = styled.button`
 `;
 
 const Detail:React.FC = () => {
+
+    const location = useLocation();
+    const capital = location.pathname.split("/")[1];
+    const country = location.state.country;
   return (
     <Container>
-        <BackButton>
+        <Link to="/"><BackButton>
             <KeyboardBackspace />
             <Word>Back</Word>
-        </BackButton>
+        </BackButton></Link>
         <DetailBox>
-            <ImageBox><Image src='https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/1280px-Flag_of_the_United_States.svg.png' alt='country flag'/></ImageBox>
+            <ImageBox><Image src={country.flags.png} alt='country flag'/></ImageBox>
             <WordBox>
-                <Title>Belgium</Title>
+                <Title>{country.name.common}</Title>
                 <Summary>
                     <MainSummary>
-                        <Word><b>Native Name: </b> Belgie</Word>
-                        <Word><b>Population: </b> 121212121212</Word>
-                        <Word><b>Region: </b> Europe</Word>
-                        <Word><b>Sub Region: </b> Western Europe</Word>
-                        <Word><b>Capital: </b> Brussels</Word>
+                        <Word><b>Native Name: </b> {country.name.nativeName[Object.keys(country.name.nativeName)[0]].common}</Word>
+                        <Word><b>Population: </b> {country.population}</Word>
+                        <Word><b>Region: </b> {country.region}</Word>
+                        <Word><b>Sub Region: </b> {country.subregion}</Word>
+                        <Word><b>Capital: </b> {country.capital}</Word>
                     </MainSummary>
                     <OtherSummary>
-                        <Word><b>Top Level Domain: </b> .be</Word>
-                        <Word><b>Currency: </b> Euro</Word>
-                        <Word><b>Languages: </b> Dutch, French, German</Word>
+                        <Word><b>Top Level Domain: </b> {country.tld}</Word>
+                        <Word><b>Currency: </b> {country.currencies[Object.keys(country.currencies)[0]].name}</Word>
+                        <Word><b>Languages: </b> {Object.values(country.languages).join(", ")}</Word>
                     </OtherSummary>
                 </Summary>
-                <Neighbours>
-                    <b>Border Countries: </b>
-                    <NeighbourButtoms>
-                        <NeighbourButtom>France</NeighbourButtom>
-                        <NeighbourButtom>Germany</NeighbourButtom>
-                        <NeighbourButtom>Netherlands</NeighbourButtom>
-                    </NeighbourButtoms>
-                </Neighbours>
+                {country.borders && <Neighbours>
+                        <b>Border Countries: </b>
+                            <NeighbourButtoms>
+                                { 
+                                        country.borders.map((item:any, index:number) => (
+                                            <NeighbourButtom key={index}>{item}</NeighbourButtom>
+                                        ))
+                                }
+                            </NeighbourButtoms>
+                    </Neighbours>}
             </WordBox>
         </DetailBox>
     </Container>

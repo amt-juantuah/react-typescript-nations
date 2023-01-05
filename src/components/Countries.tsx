@@ -1,5 +1,5 @@
 import { SearchRounded } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { SyntheticEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Country from './Country';
 import axios, { AxiosResponse } from 'axios';
@@ -102,11 +102,18 @@ type Props = {
     allCountries: object[];
 }
 
+type UnstructuredObject = {
+    [key: string]: any;
+}
+
 
 const Countries: React.FC<Props> = props => {
     const { country, allCountries } = props;
 
     const [countries, setCountries] = useState(allCountries);
+    const [filteredCountries, filteredCountriesSet] = useState(allCountries);
+    const [singleCountry, singleCountrySet] = useState(allCountries);
+
     useEffect( () => {
         const getData = async () => {
             try {
@@ -119,15 +126,30 @@ const Countries: React.FC<Props> = props => {
                     }
                 );
                 setCountries(data);
-                console.log(data);
-                console.log(typeof country)
-                console.log("countries", countries)
             } catch (error) {
                 console.log(error);
             }
         };
         getData();
     },[]);
+
+    useEffect( () => {
+        filteredCountriesSet(countries);
+    }, [countries])
+
+    const handleSearch:React.ReactEventHandler<HTMLInputElement> = (ev:SyntheticEvent<HTMLInputElement, Event>) => {
+        if (ev.target) {
+            const query:string = ((ev.target as HTMLInputElement).value).toUpperCase();
+            singleCountrySet(filteredCountries.filter((nation:UnstructuredObject) => (nation.name.common).toUpperCase().includes(query)));
+        }
+    }
+
+    const handleFilter:React.ReactEventHandler<HTMLSelectElement> = (ev:SyntheticEvent<HTMLSelectElement, Event>) => {
+        if (ev.target) {
+            const query:string = ((ev.target as HTMLInputElement).value);
+            filteredCountriesSet(countries.filter((nation:UnstructuredObject) => nation.region.includes(query)));
+        }
+    }
 
   return (
     <Container>
@@ -136,22 +158,27 @@ const Countries: React.FC<Props> = props => {
                 <SearchIconBox>
                     <SearchRounded />
                 </SearchIconBox>
-                <Search type="text" placeholder="Search for a country..."/>
+                <Search type="text" onChange={handleSearch} placeholder="Search for a country..."/>
             </SearchBox>
-            <SelectFilter>
-                <Option>Filter by Region</Option>
-                <Option>Africa</Option>
-                <Option>America</Option>
-                <Option>Asia</Option>
-                <Option>Europe</Option>
-                <Option>Oceania</Option>
+            <SelectFilter onChange={handleFilter}>
+                <Option value="">Filter by Region</Option>
+                <Option value="Africa">Africa</Option>
+                <Option value="America">America</Option>
+                <Option value="Asia">Asia</Option>
+                <Option value="Europe">Europe</Option>
+                <Option value="Oceania">Oceania</Option>
             </SelectFilter>
         </FilterBox>
         <All>
-            { countries.map(item => (<Country country={item} />))}
+            {
+               (singleCountry.length) ? 
+                    singleCountry.map((item, index ) => (<Country key={index} country={item} />))
+                    : 
+                    filteredCountries.map((item, index )=> (<Country key={index} country={item} />))
+            }
         </All>
     </Container>
   )
-}
+} 
 
 export default Countries

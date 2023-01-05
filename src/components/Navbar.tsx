@@ -1,6 +1,7 @@
 import { Brightness6Sharp } from '@mui/icons-material';
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100vw;
@@ -15,23 +16,31 @@ const Container = styled.div`
     position: sticky;
     top: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
+    & a {
+      display: content;
+      text-decoration: none;
+    }
     @media screen and (max-width: 480px) {
       padding-left: 28px;
       padding-right: 28px;
     }
 `;
 const Div = styled.div`
-    display: content;
+    display: contents;
+    width: 130px;
 `;
 
 const Title = styled.h2`
   @media screen and (max-width: 480px) {
     font-size: 14px;
-    line-hight: 20px;
+    line-height: 12px;
   }
 `;
 
 const Span = styled.span`
+  @media screen and (max-width: 480px) {
+      font-size: 12px;
+    }
 `;
 
 const Mode = styled.p`
@@ -66,10 +75,12 @@ const Mode = styled.p`
 const Navbar:React.FC = () => {
   return (
     <Container>
-        <Div>
-          <Title>Where in the world...</Title>
-          <Span>is that country?</Span>
-        </Div>
+        <Link to="/">
+          <Div>
+            <Title>Where in the world...</Title>
+            <Span>is that country?</Span>
+          </Div>
+        </Link>
         <Mode id="themeToggler">
           <Brightness6Sharp />
           <Span>Go Dark</Span>

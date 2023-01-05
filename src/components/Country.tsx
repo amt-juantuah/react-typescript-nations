@@ -1,12 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
     width: 264px;
     height: 336px;
     background-color: var(--color-elements);
-    box-shadow: 0px 0px 7px 2px rgba(0, 0, 0, 0.0294384);
+    box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.0294384);
     border-radius: 5px;
+    transition: all 0.3s;
+    &:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.0294384);
+    }
 `;
 
 const Flag = styled.div`
@@ -52,6 +58,9 @@ type Props = {
 const Country:React.FC<Props> = props => {
     const { country } = props;
   return (
+    <Link to={`/${country.capital}`}
+          state={{country}}
+    >
     <Container>
         <Flag>
             <Image src={ country.flags.png} />
@@ -65,6 +74,7 @@ const Country:React.FC<Props> = props => {
             </WordBox>
         </About>
     </Container>
+    </Link>
   )
 }
 
