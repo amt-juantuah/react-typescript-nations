@@ -1,7 +1,8 @@
 import { Brightness6Sharp } from '@mui/icons-material';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../Theme';
 
 const Container = styled.div`
     width: 100vw;
@@ -15,7 +16,8 @@ const Container = styled.div`
     background-color: var(--color-elements);
     position: sticky;
     top: 0;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0562443);
+    z-index: 2;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.19);
     & a {
       display: content;
       text-decoration: none;
@@ -44,35 +46,42 @@ const Span = styled.span`
 `;
 
 const Mode = styled.p`
-  width: 100px;
+  width: 120px;
+  cursor: pointer;
   display: flex;
   flex-flow: row;
   justify-content: space-around;
   align-items: center;
   color: hsl(0, 0%, 100%);
+  border: 1px solid var(--color-text);
+  opacity: 0.6;
   &: svg {
     fill: var(--color-text);
     @media screen and (max-width: 480px) {
-      font-size: 12px;
+      font-size: 11px;
       line-hight: 16px;
     }
   };
   &: ${Span} {
-    fill: var(--color-text);
+    color: var(--color-text);
     font-weight: 600;
     @media screen and (max-width: 480px) {
       font-size: 12px;
       line-hight: 16px;
     }
   }
+  &:hover {
+    opacity: 1;
+  }
   @media screen and (max-width: 480px) {
-    width: 87px;
+    width: 100px;
   }
 `;
 
 
 
 const Navbar:React.FC = () => {
+  const {theme, themeToggler} = useContext(ThemeContext)
   return (
     <Container>
         <Link to="/">
@@ -81,9 +90,9 @@ const Navbar:React.FC = () => {
             <Span>is that country?</Span>
           </Div>
         </Link>
-        <Mode id="themeToggler">
+        <Mode onClick={themeToggler}>
           <Brightness6Sharp />
-          <Span>Go Dark</Span>
+          <Span>{theme === "light" ? 'Dark Mode' : 'Light Mode'}</Span>
         </Mode>
     </Container>
   )

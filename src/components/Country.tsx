@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
-    width: 264px;
+    width: 255px;
     height: 336px;
     background-color: var(--color-elements);
     box-shadow: 0px 0px 6px 2px rgba(0, 0, 0, 0.0294384);
@@ -11,13 +11,13 @@ const Container = styled.div`
     transition: all 0.3s;
     &:hover {
         transform: scale(1.02);
-        box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.0294384);
+        box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.384);
     }
 `;
 
 const Flag = styled.div`
     background-color: red;
-    width: 264px;
+    width: 255px;
     height: 160px;
     border-radius: 5px 5px 0 0;
 `;

@@ -2,7 +2,7 @@ import { SearchRounded } from '@mui/icons-material';
 import React, { SyntheticEvent, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Country from './Country';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 const Container = styled.div`
     width: 100vw;
@@ -29,8 +29,11 @@ const SearchBox = styled.div`
     width: 480px;
     display: flex;
     background-color: var(--color-elements);
-    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
     border-radius: 5px;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.059);
+    &:hover {
+        box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.334);
+    }
     @media screen and (max-width: 480px) {
         height: 48px;
         width: 343px;
@@ -43,6 +46,7 @@ const Search = styled.input`
     flex: 1;
     height: 100%;
     width: 100%;
+    background-color: var(--color-elements);
     &::placeholder {
         color: #C4C4C4;
         font-size: 12px;
@@ -60,7 +64,10 @@ const SearchIconBox = styled.div`
 
 const SelectFilter = styled.select`
     background-color: var(--color-elements);
-    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.0532439);
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.059);
+    &:hover {
+        box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.334);
+    }
     border-radius: 5px;
     height: 56px;
     width: 200px;
@@ -97,6 +104,11 @@ const All = styled.div`
       }
 `;
 
+const Word = styled.span`
+    text-align: center;
+    margin: 30px auto;
+`;
+
 type Props = {
     country: object;
     allCountries: object[];
@@ -113,6 +125,7 @@ const Countries: React.FC<Props> = props => {
     const [countries, setCountries] = useState(allCountries);
     const [filteredCountries, filteredCountriesSet] = useState(allCountries);
     const [singleCountry, singleCountrySet] = useState(allCountries);
+    const [noresults, noresultsSet] = useState(false);
 
     useEffect( () => {
         const getData = async () => {
@@ -141,6 +154,9 @@ const Countries: React.FC<Props> = props => {
         if (ev.target) {
             const query:string = ((ev.target as HTMLInputElement).value).toUpperCase();
             singleCountrySet(filteredCountries.filter((nation:UnstructuredObject) => (nation.name.common).toUpperCase().includes(query)));
+            if (query) {
+                noresultsSet(true)
+            } else noresultsSet(false)
         }
     }
 
@@ -169,6 +185,7 @@ const Countries: React.FC<Props> = props => {
                 <Option value="Oceania">Oceania</Option>
             </SelectFilter>
         </FilterBox>
+        {noresults && <Word>--{singleCountry.length} search results--</Word>}
         <All>
             {
                (singleCountry.length) ? 
