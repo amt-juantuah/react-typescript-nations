@@ -149,7 +149,8 @@ const Neighbours = styled.div`
 const NeighbourButtoms = styled.div`
     height: 28px;
     display: flex;
-    flex-flow: row;
+    /* flex-flow: row; */
+    flex-wrap: wrap;
     gap: 10px;
 `;
 
