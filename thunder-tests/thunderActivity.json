@@ -54,5 +54,19 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "cff4634f-e148-4ccf-8630-e08af4e2b8eb",
+    "colId": "history",
+    "containerId": "",
+    "name": "https://restcountries.com/v2/all",
+    "url": "https://restcountries.com/v2/all",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2023-01-11T19:24:58.265Z",
+    "modified": "2023-01-11T19:24:58.265Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]

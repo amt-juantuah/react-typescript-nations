@@ -176,6 +176,7 @@ const Detail:React.FC = () => {
     const location = useLocation();
     const capital = location.pathname.split("/")[1];
     const country = location.state.country;
+    const codes = location.state.namecodes;
   return (
     <Container>
         <Link to="/"><BackButton>
@@ -205,7 +206,7 @@ const Detail:React.FC = () => {
                             <NeighbourButtoms>
                                 { 
                                         country.borders.map((item:any, index:number) => (
-                                            <NeighbourButtom key={index}>{item}</NeighbourButtom>
+                                            <NeighbourButtom key={index}>{codes[item]}</NeighbourButtom>
                                         ))
                                 }
                             </NeighbourButtoms>

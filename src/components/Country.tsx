@@ -52,14 +52,17 @@ type Props = {
     country: {
         [index: string]:any;
     };
+    namecodes: {
+        [index: string]:string;
+    }
 }
 
 
 const Country:React.FC<Props> = props => {
-    const { country } = props;
+    const { country, namecodes } = props;
   return (
     <Link to={`/${country.capital}`}
-          state={{country}}
+          state={{country, namecodes}}
     >
     <Container>
         <Flag>

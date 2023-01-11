@@ -123,8 +123,8 @@ const Word = styled.span`
 `;
 
 type Props = {
-    country: object;
-    allCountries: object[];
+    country: UnstructuredObject;
+    allCountries: UnstructuredObject[];
 }
 
 type UnstructuredObject = {
@@ -139,6 +139,7 @@ const Countries: React.FC<Props> = props => {
     const [filteredCountries, filteredCountriesSet] = useState(allCountries);
     const [singleCountry, singleCountrySet] = useState(allCountries);
     const [noresults, noresultsSet] = useState(false);
+    const [nameCode, nameCodeSet] = useState(country);
 
     useEffect( () => {
         const getData = async () => {
@@ -161,6 +162,10 @@ const Countries: React.FC<Props> = props => {
 
     useEffect( () => {
         filteredCountriesSet(countries);
+        let names:UnstructuredObject = {};
+        countries.forEach(item  => names[item.cca3] = item.name.common);
+        
+        nameCodeSet(names)
     }, [countries])
 
     const handleSearch:React.ReactEventHandler<HTMLInputElement> = (ev:SyntheticEvent<HTMLInputElement, Event>) => {
@@ -204,9 +209,9 @@ const Countries: React.FC<Props> = props => {
         <All>
             {
                (singleCountry.length) ? 
-                    singleCountry.map((item, index ) => (<Country key={index} country={item} />))
+                    singleCountry.map((item, index ) => (<Country key={index} country={item} namecodes={nameCode} />))
                     : 
-                    filteredCountries.map((item, index )=> (<Country key={index} country={item} />))
+                    filteredCountries.map((item, index )=> (<Country key={index} country={item} namecodes={nameCode} />))
             }
         </All>
     </Container>
