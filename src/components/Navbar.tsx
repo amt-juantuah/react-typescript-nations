@@ -1,4 +1,4 @@
-import { Brightness6Sharp } from '@mui/icons-material';
+import { DarkModeOutlined } from '@mui/icons-material';
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
@@ -46,23 +46,22 @@ const Span = styled.span`
 `;
 
 const Mode = styled.p`
-  width: 120px;
+  width: 100px;
   cursor: pointer;
   display: flex;
   flex-flow: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   color: hsl(0, 0%, 100%);
-  border: 1px solid var(--color-text);
   opacity: 0.6;
-  &: svg {
+  & svg {
     fill: var(--color-text);
     @media screen and (max-width: 480px) {
       font-size: 11px;
       line-hight: 16px;
     }
   };
-  &: ${Span} {
+  & ${Span} {
     color: var(--color-text);
     font-weight: 600;
     @media screen and (max-width: 480px) {
@@ -74,7 +73,7 @@ const Mode = styled.p`
     opacity: 1;
   }
   @media screen and (max-width: 480px) {
-    width: 100px;
+    width: 85px;
   }
 `;
 
@@ -91,7 +90,7 @@ const Navbar:React.FC = () => {
           </Div>
         </Link>
         <Mode onClick={themeToggler}>
-          <Brightness6Sharp />
+          <DarkModeOutlined />
           <Span>{theme === "light" ? 'Dark Mode' : 'Light Mode'}</Span>
         </Mode>
     </Container>

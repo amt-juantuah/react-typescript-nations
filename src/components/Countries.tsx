@@ -62,7 +62,7 @@ const SearchIconBox = styled.div`
     font-size: 14px;
 `;
 
-const SelectFilter = styled.select`
+const SelectBox = styled.div`
     background-color: var(--color-elements);
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.059);
     &:hover {
@@ -71,20 +71,31 @@ const SelectFilter = styled.select`
     border-radius: 5px;
     height: 56px;
     width: 200px;
-    border: none;
-    outline: none;
     padding-left: 20px;
-    line-height: 20px;
     padding-right: 20px;
     @media screen and (max-width: 480px) {
-        font-size: 12px;
         height: 48px;
         margin-top: 30px;
       }
 `;
 
+const SelectFilter = styled.select`
+    background-color: var(--color-elements);
+    height: 56px;
+    width: 100%;
+    border: none;
+    outline: none;
+    line-height: 20px;
+    @media screen and (max-width: 480px) {
+        font-size: 12px;
+        height: 48px;
+      }
+`;
+
 const Option = styled.option`
     line-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     @media screen and (max-width: 480px) {
         font-size: 12px;
         margin-top: 10px;
@@ -96,11 +107,13 @@ const All = styled.div`
     height: auto;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     row-gap: 75px;
     column-gap: 48px;
     @media screen and (max-width: 480px) {
         padding-left: 27px;
         padding-right: 27px;
+        justify-content: center;
       }
 `;
 
@@ -176,14 +189,16 @@ const Countries: React.FC<Props> = props => {
                 </SearchIconBox>
                 <Search type="text" onChange={handleSearch} placeholder="Search for a country..."/>
             </SearchBox>
-            <SelectFilter onChange={handleFilter}>
-                <Option value="">Filter by Region</Option>
-                <Option value="Africa">Africa</Option>
-                <Option value="America">America</Option>
-                <Option value="Asia">Asia</Option>
-                <Option value="Europe">Europe</Option>
-                <Option value="Oceania">Oceania</Option>
-            </SelectFilter>
+            <SelectBox>
+                <SelectFilter onChange={handleFilter}>
+                    <Option value="">Filter by Region</Option>
+                    <Option value="Africa">Africa</Option>
+                    <Option value="America">America</Option>
+                    <Option value="Asia">Asia</Option>
+                    <Option value="Europe">Europe</Option>
+                    <Option value="Oceania">Oceania</Option>
+                </SelectFilter>
+            </SelectBox>
         </FilterBox>
         {noresults && <Word>--{singleCountry.length} search results--</Word>}
         <All>
