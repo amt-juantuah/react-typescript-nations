@@ -107,7 +107,7 @@ const All = styled.div`
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: ${noresults? "space-evenly" : "space-between"};
     row-gap: 75px;
     column-gap: 48px;
     @media screen and (max-width: 480px) {
