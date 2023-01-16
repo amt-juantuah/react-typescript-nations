@@ -107,7 +107,7 @@ const All = styled.div`
     height: auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: ${noresults? "space-evenly" : "space-between"};
+    justify-content: space-between;
     row-gap: 75px;
     column-gap: 48px;
     @media screen and (max-width: 480px) {
@@ -206,7 +206,7 @@ const Countries: React.FC<Props> = props => {
             </SelectBox>
         </FilterBox>
         {noresults && <Word>--{singleCountry.length} search results--</Word>}
-        <All>
+        <All style={{justifyContent: `${noresults? "space-evenly" : "space-between"}`}}>
             {
                (singleCountry.length) ? 
                     singleCountry.map((item, index ) => (<Country key={index} country={item} namecodes={nameCode} />))
